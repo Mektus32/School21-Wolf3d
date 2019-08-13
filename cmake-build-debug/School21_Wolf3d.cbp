@@ -107,6 +107,9 @@
 		<Unit filename="/Users/ojessi/Desktop/School21-Wolf3d/libft/ft_count_words.c">
 			<Option target="School21_Wolf3d"/>
 		</Unit>
+		<Unit filename="/Users/ojessi/Desktop/School21-Wolf3d/libft/ft_find_images_in_dir.c">
+			<Option target="School21_Wolf3d"/>
+		</Unit>
 		<Unit filename="/Users/ojessi/Desktop/School21-Wolf3d/libft/ft_free_join.c">
 			<Option target="School21_Wolf3d"/>
 		</Unit>

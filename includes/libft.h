@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <dirent.h>
 
 typedef struct		s_list
 {
@@ -114,5 +115,6 @@ int					get_next_line(int fd, char **line);
 char				*ft_strtolower(char *str);
 int					ft_max(int a, int b);
 int					ft_min(int a, int b);
+char				**ft_find_images_in_dir(char *dir_name, size_t *count);
 
 #endif

@@ -101,4 +101,4 @@ add_executable(School21_Wolf3d
         src/image.c
         src/main.c
         src/main_cicle.c
-        src/sdl.c src/raycast.c src/func.c)
+        src/sdl.c src/raycast.c src/func.c libft/ft_find_images_in_dir.c)

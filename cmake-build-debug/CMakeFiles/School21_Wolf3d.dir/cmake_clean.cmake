@@ -91,6 +91,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/School21_Wolf3d.dir/src/sdl.c.o"
   "CMakeFiles/School21_Wolf3d.dir/src/raycast.c.o"
   "CMakeFiles/School21_Wolf3d.dir/src/func.c.o"
+  "CMakeFiles/School21_Wolf3d.dir/libft/ft_find_images_in_dir.c.o"
   "School21_Wolf3d.pdb"
   "School21_Wolf3d"
 )

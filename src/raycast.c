@@ -24,7 +24,7 @@ void	ft_put_ray(t_wolf *wf, size_t rect_w, size_t rect_h)
 	double		hitx;
 	double		hity;
 	int 		coor_img;
-	int 		walltext_size = 512;//random
+	int 		walltext_size = 64;//random
 	int			*col = NULL;
 	size_t		j;
 
@@ -45,10 +45,7 @@ void	ft_put_ray(t_wolf *wf, size_t rect_w, size_t rect_h)
 			if (wf->map[(int) cy * wf->map_w + (int) cx] != ' ')
 			{
 				wf->rect.h = HEIGHT / (t * (cos(angle - wf->player.angle)));
-				wf->rect.x = i;
 				wf->rect.y = HEIGHT / 2 - wf->rect.h / 2;
-				wf->rect.w = 1;
-				//ft_draw_rectangle(wf, WIDTH, HEIGHT, wf->color[wf->map[(int)cy * wf->map_w + (int)cx] - '0']);
 				hitx = cx - floor(cx + 0.5);
 				hity = cy - floor(cy + 0.5);
 				coor_img = hitx * walltext_size;
@@ -57,10 +54,9 @@ void	ft_put_ray(t_wolf *wf, size_t rect_w, size_t rect_h)
 				if (coor_img < 0)
 					coor_img += walltext_size;
 				wf->wall.size_img = walltext_size;
-				wf->wall.n_img = 1;
-				wf->wall.id_img = 1;
 				wf->wall.cor_img = coor_img;
 				wf->wall.col_h = wf->rect.h;
+				wf->wall.id_img = wf->map[(int)cy * wf->map_w + (int)cx] - '0';
 				col = ft_col_img(wf);
 				pix_x = i;
 				j = -1;

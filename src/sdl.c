@@ -12,7 +12,33 @@
 
 #include "wolf3d.h"
 
-void	ft_init_sdl(t_wolf *wf)
+static void	images(t_wolf *wf)
+{
+	char		**split;
+	size_t		count;
+	size_t		i;
+
+	if (!(split = ft_find_images_in_dir("images/", &count)))
+	{
+		ft_putstr("No directory or images\n");
+		exit(0);
+	}
+	wf->wall.images = ft_memalloc(sizeof(SDL_Surface*) * count);
+	i = -1;
+	printf("%zu\n", count);
+	while (++i < count)
+	{
+		printf("[%zu]%s\n", i, split[i]);
+		if (!(wf->wall.images[i] = SDL_LoadBMP(split[i])))
+		{
+			ft_putstr(SDL_GetError());
+			exit(0);
+		}
+	}
+	ft_frtwarr((void**)split, count);
+}
+
+void		ft_init_sdl(t_wolf *wf)
 {
 	wf->sdl = ft_memalloc(sizeof(t_sdl));
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
@@ -33,15 +59,7 @@ void	ft_init_sdl(t_wolf *wf)
 		ft_putstr(SDL_GetError());
 		exit(0);
 	}
-	wf->sdl->img = SDL_LoadBMP("image.bmp");
-	if (!wf->sdl->img)
-	{
-		ft_putstr(SDL_GetError());
-		exit(0);
-	}
 	wf->arr = (int*)wf->sdl->src->pixels;
-//	for (int i = 0; i < 512; i++)
-//		for (int j = 0; j < 512; j++)
-//			wf->arr[i * 1024 + j] = ((int*)wf->sdl->img->pixels)[i * 512 + j];
+	images(wf);
 	ft_create_map(wf);
 }

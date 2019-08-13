@@ -45,8 +45,8 @@ void	ft_create_map(t_wolf *wf)
 
 	wf->map =	"0000222222220000"\
 				"1              0"\
-				"1      11111   0"\
-				"1     00       0"\
+				"1     011111   0"\
+				"1     0        0"\
 				"0     0  1110000"\
 				"0     3        0"\
 				"0   10000      0"\
@@ -72,8 +72,6 @@ void	ft_create_map(t_wolf *wf)
 
 int 	*ft_col_img(t_wolf *wf)
 {
-	const size_t	img_w = wf->wall.size_img * wf->wall.n_img;
-	//const size_t	img_h = wf->wall.size_img;
 	int 			*col;
 	size_t			y;
 	size_t			pix_x;
@@ -83,9 +81,10 @@ int 	*ft_col_img(t_wolf *wf)
 	y = -1;
 	while (++y < wf->wall.col_h)
 	{
-		pix_x = wf->wall.id_img * wf->wall.size_img + wf->wall.cor_img;
+		pix_x = wf->wall.size_img + wf->wall.cor_img;
 		pix_y = (y * wf->wall.size_img) / wf->wall.col_h;
-		col[y] = ((int*)wf->sdl->img->pixels)[pix_y * img_w + pix_x];
+		col[y] = ((int*)wf->wall.images[wf->wall.id_img]->pixels)[pix_y
+															* wf->wall.size_img + pix_x];
 	}
 	return (col);
 }

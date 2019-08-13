@@ -12,8 +12,8 @@
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
-# define WIDTH 1024
-# define HEIGHT 512
+# define WIDTH 1670
+# define HEIGHT 920
 
 # include <stdio.h>
 # include "libft.h"
@@ -25,7 +25,6 @@ typedef struct	s_sdl
 	SDL_Window	*win;
 	SDL_Surface	*src;
 	SDL_Event	event;
-	SDL_Surface	*img;
 }				t_sdl;
 
 typedef	struct	s_rect
@@ -38,8 +37,8 @@ typedef	struct	s_rect
 
 typedef struct	s_wall
 {
+	SDL_Surface	**images;
 	size_t		size_img;
-	size_t		n_img;
 	size_t		id_img;
 	size_t		cor_img;
 	size_t		col_h;

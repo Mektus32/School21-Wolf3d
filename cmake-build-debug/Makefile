@@ -258,6 +258,33 @@ libft/ft_count_words.c.s:
 	$(MAKE) -f CMakeFiles/School21_Wolf3d.dir/build.make CMakeFiles/School21_Wolf3d.dir/libft/ft_count_words.c.s
 .PHONY : libft/ft_count_words.c.s
 
+libft/ft_find_images_in_dir.o: libft/ft_find_images_in_dir.c.o
+
+.PHONY : libft/ft_find_images_in_dir.o
+
+# target to build an object file
+libft/ft_find_images_in_dir.c.o:
+	$(MAKE) -f CMakeFiles/School21_Wolf3d.dir/build.make CMakeFiles/School21_Wolf3d.dir/libft/ft_find_images_in_dir.c.o
+.PHONY : libft/ft_find_images_in_dir.c.o
+
+libft/ft_find_images_in_dir.i: libft/ft_find_images_in_dir.c.i
+
+.PHONY : libft/ft_find_images_in_dir.i
+
+# target to preprocess a source file
+libft/ft_find_images_in_dir.c.i:
+	$(MAKE) -f CMakeFiles/School21_Wolf3d.dir/build.make CMakeFiles/School21_Wolf3d.dir/libft/ft_find_images_in_dir.c.i
+.PHONY : libft/ft_find_images_in_dir.c.i
+
+libft/ft_find_images_in_dir.s: libft/ft_find_images_in_dir.c.s
+
+.PHONY : libft/ft_find_images_in_dir.s
+
+# target to generate assembly for a file
+libft/ft_find_images_in_dir.c.s:
+	$(MAKE) -f CMakeFiles/School21_Wolf3d.dir/build.make CMakeFiles/School21_Wolf3d.dir/libft/ft_find_images_in_dir.c.s
+.PHONY : libft/ft_find_images_in_dir.c.s
+
 libft/ft_free_join.o: libft/ft_free_join.c.o
 
 .PHONY : libft/ft_free_join.o
@@ -2631,6 +2658,9 @@ help:
 	@echo "... libft/ft_count_words.o"
 	@echo "... libft/ft_count_words.i"
 	@echo "... libft/ft_count_words.s"
+	@echo "... libft/ft_find_images_in_dir.o"
+	@echo "... libft/ft_find_images_in_dir.i"
+	@echo "... libft/ft_find_images_in_dir.s"
 	@echo "... libft/ft_free_join.o"
 	@echo "... libft/ft_free_join.i"
 	@echo "... libft/ft_free_join.s"
