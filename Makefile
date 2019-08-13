@@ -17,9 +17,12 @@ NAME = wolf3d
 # src / obj files
 SRC =	sdl.c \
 		main.c \
+		func.c \
 		color.c \
 		image.c \
-		main_cicle.c
+		raycast.c \
+		main_cicle.c \
+
 
 OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
 

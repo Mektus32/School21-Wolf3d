@@ -34,4 +34,5 @@ void	ft_init_sdl(t_wolf *wf)
 		exit(0);
 	}
 	wf->arr = (int*)wf->sdl->src->pixels;
+	ft_create_map(wf);
 }

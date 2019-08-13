@@ -21,7 +21,8 @@ int		main(void)
 	wf->map_w = 16;
 	ft_init_sdl(wf);
 	ft_cicle(wf);
-	printf("check\n");
+	SDL_FreeSurface(wf->sdl->src);
+	SDL_DestroyWindow(wf->sdl->win);
 	SDL_Quit();
 	return (0);
 }
