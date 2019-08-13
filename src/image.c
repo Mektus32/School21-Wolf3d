@@ -51,7 +51,7 @@ void	ft_put_rectangle(t_wolf *wf, size_t rect_w, size_t rect_h)
 		while (++j < wf->map_w)
 		{
 			if (wf->map[i * wf->map_w + j] == ' ')
-				continue;
+				continue ;
 			wf->rect.x = j * rect_w;
 			wf->rect.y = i * rect_h;
 			wf->rect.h = rect_h;

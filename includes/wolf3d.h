@@ -25,6 +25,7 @@ typedef struct	s_sdl
 	SDL_Window	*win;
 	SDL_Surface	*src;
 	SDL_Event	event;
+	SDL_Surface	*img;
 }				t_sdl;
 
 typedef	struct	s_rect
@@ -34,6 +35,15 @@ typedef	struct	s_rect
 	size_t		w;
 	size_t		h;
 }				t_rect;
+
+typedef struct	s_wall
+{
+	size_t		size_img;
+	size_t		n_img;
+	size_t		id_img;
+	size_t		cor_img;
+	size_t		col_h;
+}				t_wall;
 
 typedef struct	s_player
 {
@@ -54,6 +64,8 @@ typedef	struct	s_wolf
 	size_t			map_w;
 	t_rect			rect;
 	t_player		player;
+	t_wall			wall;
+	int				color[10];
 }				t_wolf;
 
 void 			ft_init_sdl(t_wolf *wf);
@@ -66,5 +78,6 @@ void			ft_put_rectangle(t_wolf *wf, size_t rect_w, size_t rect_h);
 void			ft_draw_rectangle(t_wolf *wf, size_t img_w, size_t img_h, int color);
 void			ft_put_player(t_wolf *wf, size_t rect_w, size_t rect_h);
 void			ft_put_ray(t_wolf *wf, size_t rect_w, size_t rect_h);
+int				*ft_col_img(t_wolf *wf);
 
 #endif

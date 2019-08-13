@@ -41,6 +41,8 @@ void	ft_draw_rectangle(t_wolf *wf, size_t img_w, size_t img_h, int color)
 
 void	ft_create_map(t_wolf *wf)
 {
+	size_t		i;
+
 	wf->map =	"0000222222220000"\
 				"1              0"\
 				"1      11111   0"\
@@ -63,4 +65,27 @@ void	ft_create_map(t_wolf *wf)
 	wf->player.y = 2.345;
 	wf->player.angle = 1.523;
 	wf->fov = M_PI / 3.;
+	i = -1;
+	while (++i < 10)
+		wf->color[i] = pack_color(rand() % 255, rand() % 255, rand() % 255, 0);
+}
+
+int 	*ft_col_img(t_wolf *wf)
+{
+	const size_t	img_w = wf->wall.size_img * wf->wall.n_img;
+	//const size_t	img_h = wf->wall.size_img;
+	int 			*col;
+	size_t			y;
+	size_t			pix_x;
+	size_t			pix_y;
+
+	col = ft_memalloc(sizeof(int) * wf->wall.col_h);
+	y = -1;
+	while (++y < wf->wall.col_h)
+	{
+		pix_x = wf->wall.id_img * wf->wall.size_img + wf->wall.cor_img;
+		pix_y = (y * wf->wall.size_img) / wf->wall.col_h;
+		col[y] = ((int*)wf->sdl->img->pixels)[pix_y * img_w + pix_x];
+	}
+	return (col);
 }

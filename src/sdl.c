@@ -33,6 +33,15 @@ void	ft_init_sdl(t_wolf *wf)
 		ft_putstr(SDL_GetError());
 		exit(0);
 	}
+	wf->sdl->img = SDL_LoadBMP("image.bmp");
+	if (!wf->sdl->img)
+	{
+		ft_putstr(SDL_GetError());
+		exit(0);
+	}
 	wf->arr = (int*)wf->sdl->src->pixels;
+//	for (int i = 0; i < 512; i++)
+//		for (int j = 0; j < 512; j++)
+//			wf->arr[i * 1024 + j] = ((int*)wf->sdl->img->pixels)[i * 512 + j];
 	ft_create_map(wf);
 }

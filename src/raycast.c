@@ -19,8 +19,14 @@ void	ft_put_ray(t_wolf *wf, size_t rect_w, size_t rect_h)
 	double		cy;
 	size_t		i;
 	double		angle;
-	size_t		pix_x;
-	size_t		pix_y;
+	int			pix_x;
+	int			pix_y;
+	double		hitx;
+	double		hity;
+	int 		coor_img;
+	int 		walltext_size = 512;//random
+	int			*col = NULL;
+	size_t		j;
 
 	i = -1;
 	while (++i < WIDTH)
@@ -42,8 +48,30 @@ void	ft_put_ray(t_wolf *wf, size_t rect_w, size_t rect_h)
 				wf->rect.x = i;
 				wf->rect.y = HEIGHT / 2 - wf->rect.h / 2;
 				wf->rect.w = 1;
-				ft_draw_rectangle(wf, WIDTH, HEIGHT, pack_color(255, 15, 195, 0));
-				wf->arr[pix_y * WIDTH + pix_x] = pack_color(160, 160, 160, 0);
+				//ft_draw_rectangle(wf, WIDTH, HEIGHT, wf->color[wf->map[(int)cy * wf->map_w + (int)cx] - '0']);
+				hitx = cx - floor(cx + 0.5);
+				hity = cy - floor(cy + 0.5);
+				coor_img = hitx * walltext_size;
+				if (fabs(hity) > fabs(hitx))
+					coor_img = hity * walltext_size;
+				if (coor_img < 0)
+					coor_img += walltext_size;
+				wf->wall.size_img = walltext_size;
+				wf->wall.n_img = 1;
+				wf->wall.id_img = 1;
+				wf->wall.cor_img = coor_img;
+				wf->wall.col_h = wf->rect.h;
+				col = ft_col_img(wf);
+				pix_x = i;
+				j = -1;
+				while (++j < wf->rect.h)
+				{
+					pix_y = j + wf->rect.y;
+					if (pix_y < 0 || pix_y >= HEIGHT)
+						continue ;
+					wf->arr[pix_y * WIDTH + pix_x] = col[j];
+				}
+				col ? free(col) : 0;
 				break ;
 			}
 			t += 0.01;
