@@ -12,15 +12,18 @@
 
 #include "wolf3d.h"
 
-int		main(void)
+int		main(int ac, char **av)
 {
 	t_wolf	*wf;
 
 	wf = ft_memalloc(sizeof(t_wolf));
-	wf->map_h = 16;
-	wf->map_w = 16;
-	ft_init_sdl(wf);
-	ft_cicle(wf);
+	if (ac == 2)
+		ft_read_map(wf, av[1]);
+	else
+	{
+		ft_putstr("More or less 1 arguments!\n");
+	}
+	!wf->map ? ft_init_sdl(wf) : 0;
 	SDL_FreeSurface(wf->sdl->src);
 	SDL_DestroyWindow(wf->sdl->win);
 	SDL_Quit();

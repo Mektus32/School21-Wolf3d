@@ -14,6 +14,10 @@
 
 void	ft_cicle(t_wolf *wf)
 {
+
+	double		cosx;
+	double		siny;
+
 	while (!wf->loop)
 	{
 		while (SDL_PollEvent(&wf->sdl->event))
@@ -24,28 +28,48 @@ void	ft_cicle(t_wolf *wf)
 				wf->loop = 1;
 			if (wf->sdl->event.key.keysym.sym == SDLK_w)
 			{
-					wf->player.y += sin(wf->player.angle) / 7;
-					wf->player.x += cos(wf->player.angle) / 7;
+				cosx = cos(wf->player.angle);
+				siny = sin(wf->player.angle);
+				wf->player.y += siny / 7;
+				wf->player.x += cosx / 7;
 				if (wf->map[(int)wf->player.y * wf->map_w + (int)wf->player.x] != ' ')
 				{
-					wf->player.y -= sin(wf->player.angle) / 7;
-					wf->player.x -= cos(wf->player.angle) / 7;
+
+					wf->player.y -= siny / 7;
+					wf->player.x -= cosx / 7;
 				}
 			}
 			if (wf->sdl->event.key.keysym.sym == SDLK_s)
 			{
-					wf->player.y -= sin(wf->player.angle) / 7;
-					wf->player.x -= cos(wf->player.angle) / 7;
-				if (wf->map[(int) wf->player.y * wf->map_w + (int) wf->player.x] != ' ')
+				cosx = cos(wf->player.angle);
+				siny = sin(wf->player.angle);
+				wf->player.y -= siny / 7;
+				wf->player.x -= cosx / 7;
+				if (wf->map[(int)wf->player.y * wf->map_w + (int)wf->player.x] != ' ')
 				{
-					wf->player.y += sin(wf->player.angle) / 7;
-					wf->player.x += cos(wf->player.angle) / 7;
+
+					wf->player.y += siny / 7;
+					wf->player.x += cosx / 7;
 				}
 			}
+			SDL_GetMouseState(&wf->mouse.x, &wf->mouse.y);
+			wf->player.angle -= wf->mouse.speed * (WIDTH / 2 - wf->mouse.x);
+			SDL_WarpMouseInWindow(wf->sdl->win, WIDTH / 2, HEIGHT / 2);
 			if (wf->sdl->event.key.keysym.sym == SDLK_a)
-				wf->player.angle -= M_PI / 90;
-			if (wf->sdl->event.key.keysym.sym == SDLK_d)
-				wf->player.angle += M_PI / 90;
+			{
+				cosx = cos(wf->player.angle);
+				siny = sin(wf->player.angle);
+				wf->player.y -= siny / 7;
+				wf->player.x += cosx / 7;
+				if (wf->map[(int)wf->player.y * wf->map_w + (int)wf->player.x] != ' ')
+				{
+
+					wf->player.y += siny / 7;
+					wf->player.x -= cosx / 7;
+				}
+			}
+//			if (wf->sdl->event.key.keysym.sym == SDLK_d)
+//				wf->player.angle += M_PI / 90;
 		}
 		ft_create_image(wf);
 		SDL_UpdateWindowSurface(wf->sdl->win);

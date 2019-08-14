@@ -68,6 +68,7 @@ void	ft_put_ray(t_wolf *wf, size_t rect_w, size_t rect_h)
 					wf->arr[pix_y * WIDTH + pix_x] = col[j];
 				}
 				col ? free(col) : 0;
+				wf->arr[pix_y * WIDTH + pix_x] = pack_color(160, 160, 160, 0);
 				break ;
 			}
 			t += 0.01;

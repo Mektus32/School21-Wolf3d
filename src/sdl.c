@@ -25,10 +25,8 @@ static void	images(t_wolf *wf)
 	}
 	wf->wall.images = ft_memalloc(sizeof(SDL_Surface*) * count);
 	i = -1;
-	printf("%zu\n", count);
 	while (++i < count)
 	{
-		printf("[%zu]%s\n", i, split[i]);
 		if (!(wf->wall.images[i] = SDL_LoadBMP(split[i])))
 		{
 			ft_putstr(SDL_GetError());
@@ -59,7 +57,9 @@ void		ft_init_sdl(t_wolf *wf)
 		ft_putstr(SDL_GetError());
 		exit(0);
 	}
+	SDL_ShowCursor(SDL_DISABLE);
 	wf->arr = (int*)wf->sdl->src->pixels;
 	images(wf);
 	ft_create_map(wf);
+	ft_cicle(wf);
 }

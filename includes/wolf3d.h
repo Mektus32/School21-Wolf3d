@@ -12,8 +12,8 @@
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
-# define WIDTH 1670
-# define HEIGHT 920
+# define WIDTH 1620
+# define HEIGHT 720
 
 # include <stdio.h>
 # include "libft.h"
@@ -26,6 +26,13 @@ typedef struct	s_sdl
 	SDL_Surface	*src;
 	SDL_Event	event;
 }				t_sdl;
+
+typedef struct	s_mouse
+{
+	int 	x;
+	int 	y;
+	double	speed;
+}				t_mouse;
 
 typedef	struct	s_rect
 {
@@ -57,13 +64,14 @@ typedef	struct	s_wolf
 	int 			loop;
 	t_sdl			*sdl;
 	int 			*arr;
-	const char		*map;
+	char			*map;
 	double			fov;
 	size_t			map_h;
 	size_t			map_w;
 	t_rect			rect;
 	t_player		player;
 	t_wall			wall;
+	t_mouse			mouse;
 	int				color[10];
 }				t_wolf;
 
@@ -78,5 +86,6 @@ void			ft_draw_rectangle(t_wolf *wf, size_t img_w, size_t img_h, int color);
 void			ft_put_player(t_wolf *wf, size_t rect_w, size_t rect_h);
 void			ft_put_ray(t_wolf *wf, size_t rect_w, size_t rect_h);
 int				*ft_col_img(t_wolf *wf);
+void			ft_read_map(t_wolf *wf, char *filename);
 
 #endif

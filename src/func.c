@@ -43,28 +43,30 @@ void	ft_create_map(t_wolf *wf)
 {
 	size_t		i;
 
-	wf->map =	"0000222222220000"\
-				"1              0"\
-				"1     011111   0"\
-				"1     0        0"\
-				"0     0  1110000"\
-				"0     3        0"\
-				"0   10000      0"\
-				"0   0   11100  0"\
-				"0   0   0      0"\
-				"0   0   1  00000"\
-				"0       1      0"\
-				"2       1      0"\
-				"0       0      0"\
-				"0 0000000      0"\
-				"0              0"\
-				"0002222222200000";
+	!wf->map ? ft_putstr("Loaded standart map!\n") : 0;
+	!wf->map ? wf->map =	"0000222222220000"\
+							"1              0"\
+							"1     011111   0"\
+							"1     0        0"\
+							"0     0  1110000"\
+							"0     3        0"\
+							"0   10000      0"\
+							"0   0   11100  0"\
+							"0   0   0      0"\
+							"0   0   1  00000"\
+							"0       1      0"\
+							"2       1      0"\
+							"0       0      0"\
+							"0 0000000      0"\
+							"0              0"\
+							"0002222222200000" : 0;
 	wf->map_h = 16;
 	wf->map_w = 16;
 	wf->player.x = 3.456;
 	wf->player.y = 2.345;
 	wf->player.angle = 1.523;
 	wf->fov = M_PI / 3.;
+	wf->mouse.speed = 0.001;
 	i = -1;
 	while (++i < 10)
 		wf->color[i] = pack_color(rand() % 255, rand() % 255, rand() % 255, 0);
@@ -87,4 +89,45 @@ int 	*ft_col_img(t_wolf *wf)
 															* wf->wall.size_img + pix_x];
 	}
 	return (col);
+}
+
+void	ft_read_map(t_wolf *wf, char *filename)
+{
+	int		i;
+	int 	fd;
+	int 	len;
+	char	*line;
+
+	if ((fd = open(filename, O_RDONLY)) < 0)
+	{
+		ft_putstr("Can't open file!\n");
+		return ;
+	}
+	i = 0;
+	while (get_next_line(fd, &line) > 0)
+	{
+		i == 0 ? len = (int)ft_strlen(line) : 0;
+		!wf->map ?  wf->map = ft_memalloc(sizeof(char) * (len * len + 1)) : 0;
+		if (len != (int)ft_strlen(line))
+		{
+			ft_putstr("Invalid file, not the same line!\n");
+			close(fd);
+			ft_strdel(&wf->map);
+			return ;
+		}
+		if (i < len)
+			ft_strcpy(&wf->map[len * i], line);
+		else
+		{
+			ft_putstr("Invalid file, should be NxN!\n");
+			close(fd);
+			ft_strdel(&wf->map);
+			return ;
+		}
+		i++;
+	}
+	wf->map_w = len;
+	wf->map_h = len;
+	ft_init_sdl(wf);
+	//ft_cicle(wf);
 }

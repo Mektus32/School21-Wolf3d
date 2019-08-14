@@ -26,8 +26,9 @@ char	**ft_find_images_in_dir(char *dir_name, size_t *count)
 		return (NULL);
 	}
 	split = NULL;
-	*count = -2;
+	*count = 0;
 	while ((image = readdir(dir)))
+		if (image->d_name[0] != '.')
 			(*count)++;
 	if (*count != 0)
 	{
