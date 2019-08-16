@@ -87,5 +87,6 @@ void			ft_put_player(t_wolf *wf, size_t rect_w, size_t rect_h);
 void			ft_put_ray(t_wolf *wf, size_t rect_w, size_t rect_h);
 int				*ft_col_img(t_wolf *wf);
 void			ft_read_map(t_wolf *wf, char *filename);
+void			ft_init_map(t_wolf *wf, char *filename, int width, int height);
 
 #endif

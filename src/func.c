@@ -44,6 +44,8 @@ void	ft_create_map(t_wolf *wf)
 	size_t		i;
 
 	!wf->map ? ft_putstr("Loaded standart map!\n") : 0;
+	!wf->map ? wf->map_h = 16 : 0;
+	!wf->map ? wf->map_w = 16 : 0;
 	!wf->map ? wf->map =	"0000222222220000"\
 							"1              0"\
 							"1     011111   0"\
@@ -60,12 +62,10 @@ void	ft_create_map(t_wolf *wf)
 							"0 0000000      0"\
 							"0              0"\
 							"0002222222200000" : 0;
-	wf->map_h = 16;
-	wf->map_w = 16;
 	wf->player.x = 3.456;
 	wf->player.y = 2.345;
 	wf->player.angle = 1.523;
-	wf->fov = M_PI / 3.;
+	wf->fov = 2 * atan(0.66) / 1.0;//M_PI / 3.;
 	wf->mouse.speed = 0.001;
 	i = -1;
 	while (++i < 10)
@@ -91,6 +91,36 @@ int 	*ft_col_img(t_wolf *wf)
 	return (col);
 }
 
+void	ft_init_map(t_wolf *wf, char *filename, int width, int height)
+{
+	int 	i;
+	int 	fd;
+	char	*line;
+
+	if ((fd = open(filename, O_RDONLY)) < 0)
+	{
+		ft_putstr("Can't open file!\n");
+		return ;
+	}
+	wf->map = ft_memalloc(sizeof(char) * (width * height + 1));
+	i = -1;
+	while (get_next_line(fd, &line) > 0)
+	{
+		ft_strcpy(wf->map + (++i * width), line);
+		ft_strdel(&line);
+	}
+	//printf("%p\n", wf->map);
+	close(fd);
+	wf->map_h = height;
+	wf->map_w = width;
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+			printf("%c", wf->map[i * width + j]);
+		printf("\n");
+	}
+}
+
 void	ft_read_map(t_wolf *wf, char *filename)
 {
 	int		i;
@@ -107,7 +137,6 @@ void	ft_read_map(t_wolf *wf, char *filename)
 	while (get_next_line(fd, &line) > 0)
 	{
 		i == 0 ? len = (int)ft_strlen(line) : 0;
-		!wf->map ?  wf->map = ft_memalloc(sizeof(char) * (len * len + 1)) : 0;
 		if (len != (int)ft_strlen(line))
 		{
 			ft_putstr("Invalid file, not the same line!\n");
@@ -115,19 +144,11 @@ void	ft_read_map(t_wolf *wf, char *filename)
 			ft_strdel(&wf->map);
 			return ;
 		}
-		if (i < len)
-			ft_strcpy(&wf->map[len * i], line);
-		else
-		{
-			ft_putstr("Invalid file, should be NxN!\n");
-			close(fd);
-			ft_strdel(&wf->map);
-			return ;
-		}
 		i++;
+		ft_strdel(&line);
 	}
-	wf->map_w = len;
-	wf->map_h = len;
+	close(fd);
+	ft_init_map(wf, filename, len, i);
 	ft_init_sdl(wf);
 	//ft_cicle(wf);
 }
