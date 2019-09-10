@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:09:15 by ojessi            #+#    #+#             */
-/*   Updated: 2019/08/10 19:10:12 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/09/08 17:12:33 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@
 # include <stdio.h>
 # include "libft.h"
 # include "SDL.h"
+# include "SDL_mixer.h"
 # include <math.h>
+# include <time.h>
 
 typedef struct	s_sdl
 {
 	SDL_Window	*win;
 	SDL_Surface	*src;
 	SDL_Event	event;
+	Mix_Chunk	*walk;
+	Mix_Chunk	*background;
 }				t_sdl;
 
 typedef struct	s_mouse
@@ -88,5 +92,6 @@ void			ft_put_ray(t_wolf *wf, size_t rect_w, size_t rect_h);
 int				*ft_col_img(t_wolf *wf);
 void			ft_read_map(t_wolf *wf, char *filename);
 void			ft_init_map(t_wolf *wf, char *filename, int width, int height);
+void			delayformusic(int time, t_wolf *wf);
 
 #endif

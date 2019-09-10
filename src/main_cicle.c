@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_cicle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:50:29 by ojessi            #+#    #+#             */
-/*   Updated: 2019/08/10 19:50:31 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/09/10 11:52:40 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_cicle(t_wolf *wf)
 				wf->loop = 1;
 			if (wf->sdl->event.key.keysym.sym == SDLK_w)
 			{
+				delayformusic(100, wf);
 				wf->player.x += cos(wf->player.angle) / 7;
 				if (wf->map[(int)wf->player.y * wf->map_w + (int)wf->player.x] != ' ')
 					wf->player.x -= cos(wf->player.angle) / 7;
@@ -33,6 +34,7 @@ void	ft_cicle(t_wolf *wf)
 			}
 			if (wf->sdl->event.key.keysym.sym == SDLK_s)
 			{
+				delayformusic(100, wf);
 				wf->player.x -= cos(wf->player.angle) / 7;
 				if (wf->map[(int)wf->player.y * wf->map_w + (int)wf->player.x] != ' ')
 					wf->player.x += cos(wf->player.angle) / 7;

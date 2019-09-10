@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 13:59:05 by ojessi            #+#    #+#             */
-/*   Updated: 2019/08/13 13:59:06 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/09/10 11:52:48 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_create_map(t_wolf *wf)
 	!wf->map ? wf->map_w = 16 : 0;
 	!wf->map ? wf->map =	"0000222222220000"\
 							"1              0"\
-							"1     011111   0"\
+							"1         3    0"\
 							"1     0        0"\
 							"0     0  1110000"\
 							"0     3        0"\
@@ -151,4 +151,13 @@ void	ft_read_map(t_wolf *wf, char *filename)
 	ft_init_map(wf, filename, len, i);
 	ft_init_sdl(wf);
 	//ft_cicle(wf);
+}
+
+void	delayformusic(int time, t_wolf *wf)
+{
+	clock_t	clocktime;
+
+	clocktime = clock();
+	while (clock() < clocktime + time)
+		Mix_PlayChannelTimed(-1, wf->sdl->walk, 0, 300);
 }

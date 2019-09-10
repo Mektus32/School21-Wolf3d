@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ojessi <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/08 22:55:30 by ojessi            #+#    #+#              #
-#    Updated: 2019/08/10 19:09:00 by ojessi           ###   ########.fr        #
+#    Updated: 2019/09/06 16:24:02 by sskinner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,8 @@ FT_INC = -I ./libft
 FT_LNK = ./libft/libft.a
 
 # SDL
-SDL_INC = -I /Users/ojessi/Library/Frameworks/SDL2.framework/Headers
-SDL_LNK = -F /Users/ojessi/Library/Frameworks/ -framework SDL2
+SDL_INC = -I /Users/sskinner/Library/Frameworks/SDL2.framework/Headers -I /Users/sskinner/Library/Frameworks/SDL2_mixer.framework/Headers
+SDL_LNK = -F /Users/sskinner/Library/Frameworks/ -framework SDL2 -framework SDL2_mixer
 
 # directories
 SRCDIR = ./src/

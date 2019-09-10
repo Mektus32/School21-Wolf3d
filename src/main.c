@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:10:51 by ojessi            #+#    #+#             */
-/*   Updated: 2019/08/10 19:11:18 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/09/08 17:04:03 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int		main(int ac, char **av)
 	}
 	!wf->map ? ft_init_sdl(wf) : 0;
 	SDL_FreeSurface(wf->sdl->src);
+	Mix_FreeChunk(wf->sdl->background);
+	Mix_FreeChunk(wf->sdl->walk);
 	SDL_DestroyWindow(wf->sdl->win);
+	Mix_CloseAudio();
 	SDL_Quit();
 	return (0);
 }
