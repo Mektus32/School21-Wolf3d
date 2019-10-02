@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ojessi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 20:18:11 by ojessi            #+#    #+#             */
-/*   Updated: 2019/08/10 20:18:12 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/10/02 20:02:22 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	ft_create_image(t_wolf *wf)
+void	ft_create_image(t_wolf *wf, t_rays *ray)
 {
 	const size_t	rect_w = WIDTH / (wf->map_w * 2) / 2;
 	const size_t	rect_h = HEIGHT / wf->map_h / 2;
-	size_t	i;
-	size_t	j;
+	size_t			i;
+	size_t			j;
 
 	i = 0;
 	while (i < HEIGHT)
@@ -36,7 +36,7 @@ void	ft_create_image(t_wolf *wf)
 		}
 		i++;
 	}
-	ft_put_ray(wf, rect_w, rect_h);
+	ft_put_ray(wf, ray, rect_w, rect_h);
 }
 
 void	ft_put_rectangle(t_wolf *wf, size_t rect_w, size_t rect_h)

@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 13:59:05 by ojessi            #+#    #+#             */
-/*   Updated: 2019/09/10 11:52:48 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/02 19:16:47 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_draw_rectangle(t_wolf *wf, size_t img_w, size_t img_h, int color)
 				j++;
 				continue ;
 			}
-				wf->arr[cy * img_w + cx] = color;
+			wf->arr[cy * img_w + cx] = color;
 			j++;
 		}
 		i++;
@@ -44,37 +44,33 @@ void	ft_create_map(t_wolf *wf)
 	size_t		i;
 
 	!wf->map ? ft_putstr("Loaded standart map!\n") : 0;
-	!wf->map ? wf->map_h = 16 : 0;
+	!wf->map ? wf->map_h = 12 : 0;
 	!wf->map ? wf->map_w = 16 : 0;
-	!wf->map ? wf->map =	"0000222222220000"\
+	!wf->map ? wf->map = "0000222222220000"\
 							"1              0"\
 							"1         3    0"\
 							"1     0        0"\
 							"0     0  1110000"\
 							"0     3        0"\
 							"0   10000      0"\
-							"0   0   11100  0"\
 							"0   0   0      0"\
 							"0   0   1  00000"\
 							"0       1      0"\
-							"2       1      0"\
-							"0       0      0"\
-							"0 0000000      0"\
 							"0              0"\
 							"0002222222200000" : 0;
 	wf->player.x = 3.456;
 	wf->player.y = 2.345;
 	wf->player.angle = 1.523;
-	wf->fov = 2 * atan(0.66) / 1.0;//M_PI / 3.;
+	wf->fov = 2 * atan(0.66) / 1.0;
 	wf->mouse.speed = 0.001;
 	i = -1;
 	while (++i < 10)
 		wf->color[i] = pack_color(rand() % 255, rand() % 255, rand() % 255, 0);
 }
 
-int 	*ft_col_img(t_wolf *wf)
+int		*ft_col_img(t_wolf *wf)
 {
-	int 			*col;
+	int				*col;
 	size_t			y;
 	size_t			pix_x;
 	size_t			pix_y;
@@ -86,15 +82,15 @@ int 	*ft_col_img(t_wolf *wf)
 		pix_x = wf->wall.size_img + wf->wall.cor_img;
 		pix_y = (y * wf->wall.size_img) / wf->wall.col_h;
 		col[y] = ((int*)wf->wall.images[wf->wall.id_img]->pixels)[pix_y
-															* wf->wall.size_img + pix_x];
+												* wf->wall.size_img + pix_x];
 	}
 	return (col);
 }
 
 void	ft_init_map(t_wolf *wf, char *filename, int width, int height)
 {
-	int 	i;
-	int 	fd;
+	int		i;
+	int		fd;
 	char	*line;
 
 	if ((fd = open(filename, O_RDONLY)) < 0)
@@ -109,55 +105,37 @@ void	ft_init_map(t_wolf *wf, char *filename, int width, int height)
 		ft_strcpy(wf->map + (++i * width), line);
 		ft_strdel(&line);
 	}
-	//printf("%p\n", wf->map);
 	close(fd);
 	wf->map_h = height;
 	wf->map_w = width;
-	for (int i = 0; i < height; i++)
-	{
-		for (int j = 0; j < width; j++)
-			printf("%c", wf->map[i * width + j]);
-		printf("\n");
-	}
+	print_map(wf);
 }
 
 void	ft_read_map(t_wolf *wf, char *filename)
 {
-	int		i;
-	int 	fd;
-	int 	len;
+	int		store[3];
 	char	*line;
 
-	if ((fd = open(filename, O_RDONLY)) < 0)
+	if ((store[0] = open(filename, O_RDONLY)) < 0)
 	{
 		ft_putstr("Can't open file!\n");
 		return ;
 	}
-	i = 0;
-	while (get_next_line(fd, &line) > 0)
+	store[1] = 0;
+	while (get_next_line(store[0], &line) > 0)
 	{
-		i == 0 ? len = (int)ft_strlen(line) : 0;
-		if (len != (int)ft_strlen(line))
+		store[1] == 0 ? store[2] = (int)ft_strlen(line) : 0;
+		if (store[2] != (int)ft_strlen(line))
 		{
 			ft_putstr("Invalid file, not the same line!\n");
-			close(fd);
+			close(store[0]);
 			ft_strdel(&wf->map);
 			return ;
 		}
-		i++;
+		store[1]++;
 		ft_strdel(&line);
 	}
-	close(fd);
-	ft_init_map(wf, filename, len, i);
+	close(store[0]);
+	ft_init_map(wf, filename, store[2], store[1]);
 	ft_init_sdl(wf);
-	//ft_cicle(wf);
-}
-
-void	delayformusic(int time, t_wolf *wf)
-{
-	clock_t	clocktime;
-
-	clocktime = clock();
-	while (clock() < clocktime + time)
-		Mix_PlayChannelTimed(-1, wf->sdl->walk, 0, 300);
 }

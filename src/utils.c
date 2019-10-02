@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/10 19:36:25 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/02 18:45:23 by sskinner         ###   ########.fr       */
+/*   Created: 2019/10/02 18:55:13 by sskinner          #+#    #+#             */
+/*   Updated: 2019/10/02 20:16:41 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		pack_color(const int r, const int g, const int b, int a)
+void	crash(const char *str)
 {
-	a = 255;
-	return ((a << 24) + (r << 16) + (g << 8) + b);
+	ft_putstr(str);
+	exit(0);
 }
 
-int		unpack_color(const int *color, int *r, int *g, int *b)
+void	print_map(t_wolf *wf)
 {
-	*b = (*color >> 0) & 255;
-	*g = (*color >> 8) & 255;
-	*r = (*color >> 16) & 255;
-	return ((*color >> 24) & 255);
+	size_t		i;
+	size_t		j;
+
+	i = -1;
+	while (++i < wf->map_h)
+	{
+		j = -1;
+		while (++j < wf->map_w)
+			printf("%c", wf->map[i * wf->map_w + j]);
+		printf("\n");
+	}
+}
+
+void	delayformusic(int time, t_wolf *wf)
+{
+	clock_t	clocktime;
+
+	clocktime = clock();
+	while (clock() < clocktime + time)
+		Mix_PlayChannelTimed(-1, wf->sdl->walk, 0, 300);
 }

@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:09:15 by ojessi            #+#    #+#             */
-/*   Updated: 2019/09/08 17:12:33 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/02 21:22:26 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct	s_sdl
 
 typedef struct	s_mouse
 {
-	int 	x;
-	int 	y;
+	int		x;
+	int		y;
 	double	speed;
 }				t_mouse;
 
@@ -62,12 +62,29 @@ typedef struct	s_player
 	double		angle;
 }				t_player;
 
+typedef struct	s_rays
+{
+	double		t;
+	double		cx;
+	double		cy;
+	double		angle;
+	int			pix_x;
+	int			pix_y;
+	double		hitx;
+	double		hity;
+	int			coor_img;
+	int			walltext_size;
+	int			*col;
+	int			tmpx;
+	int			tmpy;
+}				t_rays;
+
 typedef	struct	s_wolf
 {
-	int 			i;
-	int 			loop;
+	int				i;
+	int				loop;
 	t_sdl			*sdl;
-	int 			*arr;
+	int				*arr;
 	char			*map;
 	double			fov;
 	size_t			map_h;
@@ -79,19 +96,23 @@ typedef	struct	s_wolf
 	int				color[10];
 }				t_wolf;
 
-void 			ft_init_sdl(t_wolf *wf);
+void			ft_init_sdl(t_wolf *wf);
 int				pack_color(const int r, const int g, const int b, int a);
 int				unpack_color(const int *color, int *r, int *g, int *b);
-void			ft_cicle(t_wolf *wf);
-void			ft_create_image(t_wolf *wf);
+void			ft_cicle(t_wolf *wf, t_rays *ray);
+void			ft_create_image(t_wolf *wf, t_rays *ray);
 void			ft_create_map(t_wolf *wf);
 void			ft_put_rectangle(t_wolf *wf, size_t rect_w, size_t rect_h);
-void			ft_draw_rectangle(t_wolf *wf, size_t img_w, size_t img_h, int color);
+void			ft_draw_rectangle(t_wolf *wf, size_t img_w, size_t img_h,
+																int color);
 void			ft_put_player(t_wolf *wf, size_t rect_w, size_t rect_h);
-void			ft_put_ray(t_wolf *wf, size_t rect_w, size_t rect_h);
+void			ft_put_ray(t_wolf *wf, t_rays *ray, size_t rect_w,
+																size_t rect_h);
 int				*ft_col_img(t_wolf *wf);
 void			ft_read_map(t_wolf *wf, char *filename);
 void			ft_init_map(t_wolf *wf, char *filename, int width, int height);
 void			delayformusic(int time, t_wolf *wf);
+void			print_map(t_wolf *wf);
+void			crash(const char *str);
 
 #endif

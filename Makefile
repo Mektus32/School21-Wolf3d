@@ -6,7 +6,7 @@
 #    By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/08 22:55:30 by ojessi            #+#    #+#              #
-#    Updated: 2019/09/06 16:24:02 by sskinner         ###   ########.fr        #
+#    Updated: 2019/10/02 18:57:14 by sskinner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC =	sdl.c \
 		image.c \
 		raycast.c \
 		main_cicle.c \
+		utils.c \
 
 
 OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
