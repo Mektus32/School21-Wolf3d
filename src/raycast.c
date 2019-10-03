@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 14:13:35 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/02 20:16:34 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/03 16:41:23 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static void	gear2(t_rays *ray, t_wolf *wf)
 	wf->wall.size_img = ray->walltext_size;
 	wf->wall.cor_img = ray->coor_img;
 	wf->wall.col_h = wf->rect.h;
-	if (ray->cx > ray->tmpx && ray->cy > ray->tmpy)
+	if (fabs(ray->hity) < 0.01 && ray->hity < 0)
 		wf->wall.id_img = 0;
-	else if (ray->cx < ray->tmpx && ray->cy > ray->tmpy)
+	else if (fabs(ray->hity) < 0.01 && ray->hity > 0)
 		wf->wall.id_img = 1;
-	else if (ray->cx > ray->tmpx && ray->cy < ray->tmpy)
+	else if (fabs(ray->hitx) < 0.01 && ray->hitx < 0)
 		wf->wall.id_img = 2;
-	else if (ray->cx < ray->tmpx && ray->cy < ray->tmpy)
+	else if (fabs(ray->hitx) < 0.01 && ray->hitx > 0)
 		wf->wall.id_img = 3;
 	ray->col = ft_col_img(wf);
 }

@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:31:06 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/02 20:20:10 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/03 16:41:40 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		ft_init_sdl(t_wolf *wf)
 {
 	t_rays	*ray;
 
-	ray = ft_memalloc(sizeof(ray));
+	ray = ft_memalloc(sizeof(t_rays));
 	wf->sdl = ft_memalloc(sizeof(t_sdl));
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
 		crash(SDL_GetError());
