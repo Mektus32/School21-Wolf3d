@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:31:06 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/03 16:41:40 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/08 09:29:13 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void		ft_init_sdl(t_wolf *wf)
 	images(wf);
 	ft_create_map(wf);
 	ft_cicle(wf, ray);
+	free(ray);
 }

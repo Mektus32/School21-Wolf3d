@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:10:51 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/02 19:24:54 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/08 09:29:27 by ojessi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		main(int ac, char **av)
 {
 	t_wolf	*wf;
 
+	//sleep(5);
 	wf = ft_memalloc(sizeof(t_wolf));
 	if (ac == 2)
 		ft_read_map(wf, av[1]);
@@ -30,5 +31,7 @@ int		main(int ac, char **av)
 	SDL_DestroyWindow(wf->sdl->win);
 	Mix_CloseAudio();
 	SDL_Quit();
+	free(wf->sdl);
+	free(wf);
 	return (0);
 }
