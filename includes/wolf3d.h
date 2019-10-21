@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:09:15 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/02 21:22:26 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/21 16:27:46 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ void			ft_init_map(t_wolf *wf, char *filename, int width, int height);
 void			delayformusic(int time, t_wolf *wf);
 void			print_map(t_wolf *wf);
 void			crash(const char *str);
+int				map_test(t_wolf *wf);
 
 #endif

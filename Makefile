@@ -6,14 +6,14 @@
 #    By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/08 22:55:30 by ojessi            #+#    #+#              #
-#    Updated: 2019/10/08 10:22:23 by ojessi           ###   ########.fr        #
+#    Updated: 2019/10/21 16:31:54 by sskinner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: all, clean, fclean, re, obj, red, grn, off, norm
 
 NAME = wolf3d
-
+ID = $(shell id -un)
 # src / obj files
 SRC =	sdl.c \
 		main.c \
@@ -23,6 +23,7 @@ SRC =	sdl.c \
 		raycast.c \
 		main_cicle.c \
 		utils.c \
+		test.c \
 
 
 OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
@@ -38,8 +39,8 @@ FT_INC = -I ./libft
 FT_LNK = ./libft/libft.a
 
 # SDL
-SDL_INC = -I /Users/ojessi/Library/Frameworks/SDL2.framework/Headers -I /Users/ojessi/Library/Frameworks/SDL2_mixer.framework/Headers
-SDL_LNK = -F /Users/ojessi/Library/Frameworks/ -framework SDL2 -framework SDL2_mixer
+SDL_INC = -I /Users/$(ID)/Library/Frameworks/SDL2.framework/Headers -I /Users/ojessi/Library/Frameworks/SDL2_mixer.framework/Headers
+SDL_LNK = -F /Users/$(ID)/Library/Frameworks/ -framework SDL2 -framework SDL2_mixer
 
 # directories
 SRCDIR = ./src/

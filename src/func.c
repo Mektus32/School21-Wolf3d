@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 13:59:05 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/02 19:16:47 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/21 16:27:39 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,7 @@ void	ft_init_map(t_wolf *wf, char *filename, int width, int height)
 	int		fd;
 	char	*line;
 
-	if ((fd = open(filename, O_RDONLY)) < 0)
-	{
-		ft_putstr("Can't open file!\n");
-		return ;
-	}
+	fd = open(filename, O_RDONLY);
 	wf->map = ft_memalloc(sizeof(char) * (width * height + 1));
 	i = -1;
 	while (get_next_line(fd, &line) > 0)
@@ -105,9 +101,15 @@ void	ft_init_map(t_wolf *wf, char *filename, int width, int height)
 		ft_strcpy(wf->map + (++i * width), line);
 		ft_strdel(&line);
 	}
-	close(fd);
 	wf->map_h = height;
 	wf->map_w = width;
+	if (map_test(wf) == -1)
+	{
+		close(fd);
+		ft_strdel(&wf->map);
+		return ;
+	}
+	close(fd);
 	print_map(wf);
 }
 
@@ -127,7 +129,7 @@ void	ft_read_map(t_wolf *wf, char *filename)
 		store[1] == 0 ? store[2] = (int)ft_strlen(line) : 0;
 		if (store[2] != (int)ft_strlen(line))
 		{
-			ft_putstr("Invalid file, not the same line!\n");
+			ft_putstr("Map Test ///  Width of map is not correct!\n");
 			close(store[0]);
 			ft_strdel(&wf->map);
 			return ;
