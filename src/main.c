@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:10:51 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/08 09:29:27 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/10/22 16:09:24 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		main(int ac, char **av)
 {
 	t_wolf	*wf;
 
-	//sleep(5);
 	wf = ft_memalloc(sizeof(t_wolf));
 	if (ac == 2)
 		ft_read_map(wf, av[1]);

@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 16:20:36 by sskinner          #+#    #+#             */
-/*   Updated: 2019/10/21 16:34:03 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/22 16:08:38 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,9 @@ static int		player_test(t_wolf *wf)
 
 int				map_test(t_wolf *wf)
 {
-	if (symbolic_test(wf) == -1)
-		return (-1);
-	if (wall_test(wf) == -1)
-		return (-1);
-	if (player_test(wf) == -1)
+	if ((symbolic_test(wf) == -1) ||
+	(wall_test(wf) == -1) ||
+	(player_test(wf) == -1))
 		return (-1);
 	return (0);
 }

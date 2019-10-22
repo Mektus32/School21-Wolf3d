@@ -6,13 +6,13 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:31:06 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/08 09:29:13 by ojessi           ###   ########.fr       */
+/*   Updated: 2019/10/22 16:39:24 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static void	images(t_wolf *wf)
+static void		images(t_wolf *wf)
 {
 	char		**split;
 	size_t		count;
@@ -36,7 +36,36 @@ static void	images(t_wolf *wf)
 	ft_frtwarr((void**)split, count);
 }
 
-void		ft_init_sdl(t_wolf *wf)
+static void		setup_defaults(t_wolf *wf)
+{
+	size_t		i;
+	size_t		j;
+	int			flag;
+
+	i = -1;
+	j = 0;
+	flag = 0;
+	while (wf->map[++i] != '\0')
+	{
+		if (wf->map[i] == ' ' && flag == 0)
+		{
+			flag = 1;
+			wf->player.x = i - (wf->map_w * j) + 0.5;
+			wf->player.y = j + 0.5;
+		}
+		if (i / wf->map_w > 0)
+			j = i / wf->map_w;
+		if (wf->map[i] == 'x')
+		{
+			flag = 1;
+			wf->player.x = i - (wf->map_w * j) + 0.5;
+			wf->player.y = j + 0.5;
+			wf->map[i] = ' ';
+		}
+	}
+}
+
+void			ft_init_sdl(t_wolf *wf)
 {
 	t_rays	*ray;
 
@@ -59,6 +88,7 @@ void		ft_init_sdl(t_wolf *wf)
 	wf->arr = (int*)wf->sdl->src->pixels;
 	images(wf);
 	ft_create_map(wf);
+	setup_defaults(wf);
 	ft_cicle(wf, ray);
 	free(ray);
 }
