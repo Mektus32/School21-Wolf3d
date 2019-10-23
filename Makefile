@@ -6,7 +6,7 @@
 #    By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/08 22:55:30 by ojessi            #+#    #+#              #
-#    Updated: 2019/10/21 16:31:54 by sskinner         ###   ########.fr        #
+#    Updated: 2019/10/23 18:14:45 by sskinner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,10 @@ FT_INC = -I ./libft
 FT_LNK = ./libft/libft.a
 
 # SDL
-SDL_INC = -I /Users/$(ID)/Library/Frameworks/SDL2.framework/Headers -I /Users/ojessi/Library/Frameworks/SDL2_mixer.framework/Headers
-SDL_LNK = -F /Users/$(ID)/Library/Frameworks/ -framework SDL2 -framework SDL2_mixer
+ SDL_INC = -I /Users/$(ID)/Library/Frameworks/SDL2.framework/Headers -I /Users/$(ID)/Library/Frameworks/SDL2_mixer.framework/Headers -I /Users/$(ID)/Library/Frameworks/SDL2_ttf.framework/Headers -I /Users/$(ID)/Library/Frameworks/SDL2_image.framework/Headers
+ SDL_LNK = -F /Users/$(ID)/Library/Frameworks/ -framework SDL2 -framework SDL2_mixer -framework SDL2_ttf -framework SDL2_image
+#SDL_INC = -I ./SDL_libs/SDL2.framework/Headers -I ./SDL_libs/SDL2_mixer.framework/Headers -I ./SDL_libs/SDL2_ttf.framework/Headers -I ./SDL_libs/SDL2_image.framework/Headers
+#SDL_LNK = -F ./SDL_libs -framework SDL2 -framework SDL2_mixer -framework SDL2_ttf -framework SDL2_image
 
 # directories
 SRCDIR = ./src/

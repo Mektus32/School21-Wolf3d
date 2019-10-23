@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 18:55:13 by sskinner          #+#    #+#             */
-/*   Updated: 2019/10/22 16:24:37 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:15:55 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,22 @@ void	delayformusic(int time, t_wolf *wf)
 	clocktime = clock();
 	while (clock() < clocktime + time)
 		Mix_PlayChannelTimed(-1, wf->sdl->walk, 0, 300);
+}
+
+int		fpsset(t_wolf *wf)
+{
+	long	getticks;
+
+	getticks = SDL_GetTicks();
+	wf->framespersecond = (int)(getticks - wf->frametimelast);
+	wf->frametimelast = getticks;
+	wf->framespersecond = (int)(1000.f / wf->framespersecond);
+	return (wf->framespersecond);
+}
+
+void		put_fps(t_wolf *wf)
+{
+	wf->fps->message = TTF_RenderText_Solid(wf->fps->font,
+						ft_itoa(wf->framespersecond), wf->fps->textColor);
+	SDL_BlitSurface(wf->fps->message, NULL, wf->sdl->src, &wf->fps->textRect);
 }

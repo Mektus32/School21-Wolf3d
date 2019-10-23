@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:10:51 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/22 16:09:24 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:14:26 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		main(int ac, char **av)
 {
-	t_wolf	*wf;
+	t_wolf			*wf;
 
 	wf = ft_memalloc(sizeof(t_wolf));
 	if (ac == 2)
@@ -29,8 +29,11 @@ int		main(int ac, char **av)
 	Mix_FreeChunk(wf->sdl->walk);
 	SDL_DestroyWindow(wf->sdl->win);
 	Mix_CloseAudio();
+	TTF_CloseFont(wf->fps->font);
+	TTF_Quit();
 	SDL_Quit();
 	free(wf->sdl);
+	free(wf->fps);
 	free(wf);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:31:06 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/22 16:39:24 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:15:49 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,44 @@ static void		images(t_wolf *wf)
 
 static void		setup_defaults(t_wolf *wf)
 {
-	size_t		i;
-	size_t		j;
-	int			flag;
+	int		store[3];
 
-	i = -1;
-	j = 0;
-	flag = 0;
-	while (wf->map[++i] != '\0')
+	store[0] = -1;
+	store[1] = 0;
+	store[2] = 0;
+	while (wf->map[++store[0]] != '\0')
 	{
-		if (wf->map[i] == ' ' && flag == 0)
+		if (wf->map[store[0]] == ' ' && store[2] == 0)
 		{
-			flag = 1;
-			wf->player.x = i - (wf->map_w * j) + 0.5;
-			wf->player.y = j + 0.5;
+			store[2] = 1;
+			wf->player.x = store[0] - (wf->map_w * store[1]) + 0.5;
+			wf->player.y = store[1] + 0.5;
 		}
-		if (i / wf->map_w > 0)
-			j = i / wf->map_w;
-		if (wf->map[i] == 'x')
+		if (store[0] / wf->map_w > 0)
+			store[1] = store[0] / wf->map_w;
+		if (wf->map[store[0]] == 'x')
 		{
-			flag = 1;
-			wf->player.x = i - (wf->map_w * j) + 0.5;
-			wf->player.y = j + 0.5;
-			wf->map[i] = ' ';
+			store[2] = 1;
+			wf->player.x = store[0] - (wf->map_w * store[1]) + 0.5;
+			wf->player.y = store[1] + 0.5;
+			wf->map[store[0]] = ' ';
 		}
 	}
+	wf->framespersecond = 0;
+	wf->frametimelast = SDL_GetTicks();
+}
+
+static void		setup_text(t_wolf *wf)
+{
+	wf->fps = malloc(sizeof(wf->fps));
+	wf->fps->textColor.r = 255;
+	wf->fps->textColor.g = 255;
+	wf->fps->textColor.b = 255;
+	wf->fps->textRect.x = 50;
+	wf->fps->textRect.y = 50;
+	wf->fps->textRect.w = 0;
+	wf->fps->textRect.h = 0;
+	wf->fps->font = TTF_OpenFont("fonts/Tahoma.ttf", 20);
 }
 
 void			ft_init_sdl(t_wolf *wf)
@@ -73,19 +86,20 @@ void			ft_init_sdl(t_wolf *wf)
 	wf->sdl = ft_memalloc(sizeof(t_sdl));
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
 		crash(SDL_GetError());
-	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+	if (!(TTF_Init()))
+		crash(SDL_GetError());
 	wf->sdl->walk = Mix_LoadWAV("sound/Sand_Boots_Running.wav");
 	wf->sdl->background = Mix_LoadWAV("sound/background.wav");
-	wf->sdl->win = SDL_CreateWindow("Wolf3d", 100, 100,
-			WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-	if (!wf->sdl->win)
+	if (!(wf->sdl->win = SDL_CreateWindow("Wolf3d", 100, 100,
+			WIDTH, HEIGHT, SDL_WINDOW_SHOWN)))
 		crash(SDL_GetError());
-	wf->sdl->src = SDL_GetWindowSurface(wf->sdl->win);
-	if (!wf->sdl->src)
+	if (!(wf->sdl->src = SDL_GetWindowSurface(wf->sdl->win)))
 		crash(SDL_GetError());
-	SDL_ShowCursor(SDL_DISABLE);
 	Mix_PlayChannel(-1, wf->sdl->background, -1);
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+	SDL_ShowCursor(SDL_DISABLE);
 	wf->arr = (int*)wf->sdl->src->pixels;
+	setup_text(wf);
 	images(wf);
 	ft_create_map(wf);
 	setup_defaults(wf);
