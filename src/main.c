@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:10:51 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/23 18:14:26 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:15:51 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		main(int ac, char **av)
 	SDL_DestroyWindow(wf->sdl->win);
 	Mix_CloseAudio();
 	TTF_CloseFont(wf->fps->font);
+	SDL_FreeSurface(wf->fps->message);
 	TTF_Quit();
 	SDL_Quit();
 	free(wf->sdl);

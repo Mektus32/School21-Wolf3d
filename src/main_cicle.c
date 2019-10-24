@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:50:29 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/23 18:16:01 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/24 16:11:39 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,8 @@ void		ft_cicle(t_wolf *wf, t_rays *ray)
 			if (wf->sdl->event.key.keysym.sym == SDLK_d)
 				wf->player.angle += M_PI / 90;
 		}
-		fpsset(wf);
-		put_fps(wf);
 		ft_create_image(wf, ray);
+		put_fps(wf);
 		SDL_UpdateWindowSurface(wf->sdl->win);
 	}
 }

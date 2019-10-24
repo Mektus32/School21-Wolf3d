@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:31:06 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/23 18:15:49 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/24 16:29:37 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,12 @@ static void		setup_text(t_wolf *wf)
 	wf->fps->textColor.r = 255;
 	wf->fps->textColor.g = 255;
 	wf->fps->textColor.b = 255;
-	wf->fps->textRect.x = 50;
-	wf->fps->textRect.y = 50;
-	wf->fps->textRect.w = 0;
-	wf->fps->textRect.h = 0;
-	wf->fps->font = TTF_OpenFont("fonts/Tahoma.ttf", 20);
+	wf->fps->textRect.x = WIDTH - 200;
+	wf->fps->textRect.y = HEIGHT - 50;
+	wf->fps->textRect.w = 300;
+	wf->fps->textRect.h = 200;
+	if (!(wf->fps->font = TTF_OpenFont("fonts/OpenSans-Semibold.ttf", 25)))
+		crash(SDL_GetError());
 }
 
 void			ft_init_sdl(t_wolf *wf)
@@ -84,9 +85,9 @@ void			ft_init_sdl(t_wolf *wf)
 
 	ray = ft_memalloc(sizeof(t_rays));
 	wf->sdl = ft_memalloc(sizeof(t_sdl));
-	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
+	if (TTF_Init() == -1)
 		crash(SDL_GetError());
-	if (!(TTF_Init()))
+	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
 		crash(SDL_GetError());
 	wf->sdl->walk = Mix_LoadWAV("sound/Sand_Boots_Running.wav");
 	wf->sdl->background = Mix_LoadWAV("sound/background.wav");
