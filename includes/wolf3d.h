@@ -6,14 +6,14 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:09:15 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/24 16:22:30 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/25 15:20:48 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
-# define WIDTH 1620
-# define HEIGHT 720
+# define WIDTH 1280
+# define HEIGHT 640
 
 # include <stdio.h>
 # include "libft.h"
@@ -132,5 +132,6 @@ void				crash(const char *str);
 int					map_test(t_wolf *wf);
 int					fpsset(t_wolf *wf);
 void				put_fps(t_wolf *wf);
+void				cleaning(t_wolf *wf);
 
 #endif

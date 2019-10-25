@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 18:55:13 by sskinner          #+#    #+#             */
-/*   Updated: 2019/10/24 16:30:21 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/25 16:24:50 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,18 @@ int		fpsset(t_wolf *wf)
 	return (wf->framespersecond);
 }
 
-void		put_fps(t_wolf *wf)
+void	put_fps(t_wolf *wf)
 {
+	char		*fps;
+	const char	*str = "Frame rate : ";
+	char		*tmp;
+
+	fps = ft_itoa(fpsset(wf));
+	tmp = ft_strjoin(str, fps);
 	wf->fps->message = TTF_RenderText_Solid(wf->fps->font,
-						ft_strjoin("Frame rate : ", ft_itoa(fpsset(wf))), wf->fps->textColor); //maybe leak?
+										tmp, wf->fps->textColor);
 	SDL_BlitSurface(wf->fps->message, NULL, wf->sdl->src, &wf->fps->textRect);
+	SDL_FreeSurface(wf->fps->message);
+	free(tmp);
+	free(fps);
 }

@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:31:06 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/24 16:29:37 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/25 16:08:40 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ void			ft_init_sdl(t_wolf *wf)
 
 	ray = ft_memalloc(sizeof(t_rays));
 	wf->sdl = ft_memalloc(sizeof(t_sdl));
-	if (TTF_Init() == -1)
-		crash(SDL_GetError());
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
 		crash(SDL_GetError());
+	if (TTF_Init() == -1)
+		crash(TTF_GetError());
 	wf->sdl->walk = Mix_LoadWAV("sound/Sand_Boots_Running.wav");
 	wf->sdl->background = Mix_LoadWAV("sound/background.wav");
 	if (!(wf->sdl->win = SDL_CreateWindow("Wolf3d", 100, 100,
