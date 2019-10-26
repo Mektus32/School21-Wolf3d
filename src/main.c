@@ -6,13 +6,28 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:10:51 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/25 16:23:58 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/26 17:52:52 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		main(int ac, char **av)
+static void	cleaning(t_wolf *wf)
+{
+	SDL_FreeSurface(wf->sdl->src);
+	Mix_FreeChunk(wf->sdl->background);
+	Mix_FreeChunk(wf->sdl->walk);
+	TTF_CloseFont(wf->fps->font);
+	SDL_DestroyWindow(wf->sdl->win);
+	Mix_CloseAudio();
+	TTF_Quit();
+	SDL_Quit();
+	free(wf->sdl);
+	free(wf->fps);
+	free(wf);
+}
+
+int			main(int ac, char **av)
 {
 	t_wolf			*wf;
 
@@ -24,20 +39,4 @@ int		main(int ac, char **av)
 	!wf->map ? ft_init_sdl(wf) : 0;
 	cleaning(wf);
 	return (0);
-}
-
-void	cleaning(t_wolf *wf)
-{
-	SDL_FreeSurface(wf->sdl->src);
-	Mix_FreeChunk(wf->sdl->background);
-	Mix_FreeChunk(wf->sdl->walk);
-	TTF_CloseFont(wf->fps->font);
-	SDL_DestroyWindow(wf->sdl->win);
-	Mix_CloseAudio();
-	free(wf->sdl);
-	free(wf->fps);
-	free(wf);
-	TTF_Quit();
-	SDL_Quit();
-	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:31:06 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/26 12:20:45 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/26 17:52:58 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void		setup_defaults(t_wolf *wf)
 
 static void		setup_text(t_wolf *wf)
 {
-	wf->fps = malloc(sizeof(wf->fps));
+	wf->fps = malloc(sizeof(t_text));
 	wf->fps->textColor.r = 255;
 	wf->fps->textColor.g = 255;
 	wf->fps->textColor.b = 255;
@@ -75,6 +75,10 @@ static void		setup_text(t_wolf *wf)
 	wf->fps->textRect.y = HEIGHT - 50;
 	wf->fps->textRect.w = 300;
 	wf->fps->textRect.h = 200;
+	wf->fps->backRect.x = 0;
+	wf->fps->backRect.y = 0;
+	wf->fps->backRect.w = WIDTH;
+	wf->fps->backRect.h = HEIGHT;
 	if (!(wf->fps->font = TTF_OpenFont("fonts/OpenSans-Semibold.ttf", 25)))
 		crash(SDL_GetError());
 }

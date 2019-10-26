@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:09:15 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/25 16:36:09 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/26 17:49:14 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct		s_text
 	SDL_Surface		*message;
 	SDL_Texture		*text;
 	SDL_Rect		textRect;
+	SDL_Rect		backRect;
 	SDL_Color		textColor;
 }					t_text;
 
@@ -131,6 +132,5 @@ void				print_map(t_wolf *wf);
 void				crash(const char *str);
 int					map_test(t_wolf *wf);
 void				put_fps(t_wolf *wf);
-void				cleaning(t_wolf *wf);
 
 #endif
