@@ -6,7 +6,7 @@
 /*   By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/10 19:31:06 by ojessi            #+#    #+#             */
-/*   Updated: 2019/10/25 16:08:40 by sskinner         ###   ########.fr       */
+/*   Updated: 2019/10/26 12:20:45 by sskinner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void			ft_init_sdl(t_wolf *wf)
 		crash(SDL_GetError());
 	if (TTF_Init() == -1)
 		crash(TTF_GetError());
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 	wf->sdl->walk = Mix_LoadWAV("sound/Sand_Boots_Running.wav");
 	wf->sdl->background = Mix_LoadWAV("sound/background.wav");
 	if (!(wf->sdl->win = SDL_CreateWindow("Wolf3d", 100, 100,
@@ -97,7 +98,6 @@ void			ft_init_sdl(t_wolf *wf)
 	if (!(wf->sdl->src = SDL_GetWindowSurface(wf->sdl->win)))
 		crash(SDL_GetError());
 	Mix_PlayChannel(-1, wf->sdl->background, -1);
-	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 	SDL_ShowCursor(SDL_DISABLE);
 	wf->arr = (int*)wf->sdl->src->pixels;
 	setup_text(wf);
