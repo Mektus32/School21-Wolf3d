@@ -70,9 +70,9 @@ typedef struct		s_text
 	TTF_Font		*font;
 	SDL_Surface		*message;
 	SDL_Texture		*text;
-	SDL_Rect		textRect;
-	SDL_Rect		backRect;
-	SDL_Color		textColor;
+	SDL_Rect		text_rect;
+	SDL_Rect		back_rect;
+	SDL_Color		text_color;
 }					t_text;
 
 typedef struct		s_rays
@@ -126,7 +126,8 @@ void				ft_put_ray(t_wolf *wf, t_rays *ray, size_t rect_w,
 															size_t rect_h);
 int					*ft_col_img(t_wolf *wf);
 void				ft_read_map(t_wolf *wf, char *filename);
-void				ft_init_map(t_wolf *wf, char *filename, int width, int height);
+void				ft_init_map(t_wolf *wf, char *filename, int width,
+		int height);
 void				delayformusic(int time, t_wolf *wf);
 void				print_map(t_wolf *wf);
 void				crash(const char *str);

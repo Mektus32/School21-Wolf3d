@@ -6,7 +6,7 @@
 #    By: sskinner <sskinner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/08 22:55:30 by ojessi            #+#    #+#              #
-#    Updated: 2019/10/26 17:48:47 by sskinner         ###   ########.fr        #
+#    Updated: 2019/10/27 10:19:01 by ojessi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
 
 # compiler
 CC = gcc
-#CFLAGS = -Wextra -Wall -Werror -g
+CFLAGS = -Wextra -Wall -Werror
 
 # ft library
 FT = ./libft

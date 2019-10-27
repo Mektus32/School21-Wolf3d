@@ -68,17 +68,17 @@ static void		setup_defaults(t_wolf *wf)
 static void		setup_text(t_wolf *wf)
 {
 	wf->fps = malloc(sizeof(t_text));
-	wf->fps->textColor.r = 255;
-	wf->fps->textColor.g = 255;
-	wf->fps->textColor.b = 255;
-	wf->fps->textRect.x = WIDTH - 200;
-	wf->fps->textRect.y = HEIGHT - 50;
-	wf->fps->textRect.w = 300;
-	wf->fps->textRect.h = 200;
-	wf->fps->backRect.x = 0;
-	wf->fps->backRect.y = 0;
-	wf->fps->backRect.w = WIDTH;
-	wf->fps->backRect.h = HEIGHT;
+	wf->fps->text_color.r = 255;
+	wf->fps->text_color.g = 255;
+	wf->fps->text_color.b = 255;
+	wf->fps->text_rect.x = WIDTH - 200;
+	wf->fps->text_rect.y = HEIGHT - 50;
+	wf->fps->text_rect.w = 300;
+	wf->fps->text_rect.h = 200;
+	wf->fps->back_rect.x = 0;
+	wf->fps->back_rect.y = 0;
+	wf->fps->back_rect.w = WIDTH;
+	wf->fps->back_rect.h = HEIGHT;
 	if (!(wf->fps->font = TTF_OpenFont("fonts/OpenSans-Semibold.ttf", 25)))
 		crash(SDL_GetError());
 }

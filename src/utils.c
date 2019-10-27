@@ -57,8 +57,9 @@ void	put_fps(t_wolf *wf)
 	fps = ft_itoa(wf->framespersecond);
 	tmp = ft_strjoin(str, fps);
 	wf->fps->message = TTF_RenderText_Solid(wf->fps->font,
-										tmp, wf->fps->textColor);
-	SDL_BlitSurface(wf->fps->message, &wf->fps->backRect, wf->sdl->src, &wf->fps->textRect);
+										tmp, wf->fps->text_color);
+	SDL_BlitSurface(wf->fps->message, &wf->fps->back_rect, wf->sdl->src,
+			&wf->fps->text_rect);
 	SDL_FreeSurface(wf->fps->message);
 	free(tmp);
 	free(fps);
